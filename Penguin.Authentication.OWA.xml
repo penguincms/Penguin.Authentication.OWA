@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Penguin.Authentication.OWA</name>
+    </assembly>
+    <members>
+        <member name="T:Penguin.Authentication.OWA.OWAValidator">
+            <summary>
+            Validates an Email/Password combination against Outlook Web Access with the intent of validating organizational domain 
+            credentials without access to the internal domain server
+            </summary>
+        </member>
+        <member name="M:Penguin.Authentication.OWA.OWAValidator.#ctor">
+            <summary>
+            Constructs a new instance of the OWA Validator
+            </summary>
+        </member>
+        <member name="M:Penguin.Authentication.OWA.OWAValidator.Validate(System.String,System.String)">
+            <summary>
+            Returns true if the given Email/Password combination allows for login on the OWA server
+            </summary>
+            <param name="Username"></param>
+            <param name="Password"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
