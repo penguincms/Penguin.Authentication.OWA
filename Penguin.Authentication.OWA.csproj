@@ -8,6 +8,8 @@
     <PackageProjectUrl>https://github.com/penguincms/Penguin.Authentication.OWA</PackageProjectUrl>
     <PackageIconUrl>http://www.penguinms.com/client/images/pg.png</PackageIconUrl>
     <Version>1.0.2</Version>
+	<IncludeSymbols>true</IncludeSymbols>    
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Description>Provides a method for authenticating against Outlook Web Access, allowing domain authentication without access to the domain server</Description>
   </PropertyGroup>
 
