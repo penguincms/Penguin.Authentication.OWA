@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Penguin.Authentication.OWA.Local</name>
+        <name>Penguin.Authentication.OWA</name>
     </assembly>
     <members>
         <member name="T:Penguin.Authentication.OWA.OWAValidator">
