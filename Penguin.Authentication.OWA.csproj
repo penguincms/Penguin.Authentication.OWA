@@ -4,6 +4,8 @@
     <PackageProjectUrl>https://github.com/penguincms/Penguin.Authentication.OWA</PackageProjectUrl>
     <Version>1.0.2</Version>
     <Description>Provides a method for authenticating against Outlook Web Access, allowing domain authentication without access to the domain server</Description>
+    <AssemblyName>Penguin.Authentication.OWA</AssemblyName>
+    <RootNamespace>Penguin.Authentication.OWA</RootNamespace>
   </PropertyGroup>
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
 </Project>
