@@ -8,7 +8,7 @@ using System.Text;
 namespace Penguin.Authentication.OWA
 {
     /// <summary>
-    /// Validates an Email/Password combination against Outlook Web Access with the intent of validating organizational domain 
+    /// Validates an Email/Password combination against Outlook Web Access with the intent of validating organizational domain
     /// credentials without access to the internal domain server
     /// </summary>
     public class OWAValidator
@@ -88,7 +88,7 @@ namespace Penguin.Authentication.OWA
         private const string LOGIN_URL = "https://exchange.postoffice.net/owa/auth.owa";
         private const string SUCCESS_URI = "https://exchange.postoffice.net/owa/";
         private const string VALIDATE_FORMAT = "destination=https%3A%2F%2Fexchange.postoffice.net%2Fowa&flags=4&forcedownlevel=0&username={0}&password={1}&passwordText=&trusted=4&isUtf8=1";
-        private CookieContainer Cookies = new CookieContainer();
+        private readonly CookieContainer Cookies = new CookieContainer();
 
         #endregion Fields
 
