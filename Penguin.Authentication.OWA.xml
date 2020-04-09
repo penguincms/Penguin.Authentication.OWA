@@ -6,7 +6,7 @@
     <members>
         <member name="T:Penguin.Authentication.OWA.OWAValidator">
             <summary>
-            Validates an Email/Password combination against Outlook Web Access with the intent of validating organizational domain 
+            Validates an Email/Password combination against Outlook Web Access with the intent of validating organizational domain
             credentials without access to the internal domain server
             </summary>
         </member>
