@@ -35,8 +35,19 @@ namespace Penguin.Authentication.OWA
         /// <param name="Username"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         public bool Validate(string Username, string Password)
         {
+            if (Username is null)
+            {
+                throw new ArgumentNullException(nameof(Username));
+            }
+
+            if (Password is null)
+            {
+                throw new ArgumentNullException(nameof(Password));
+            }
+
             string data = string.Format(VALIDATE_FORMAT, Username.Replace("@", "%40"), System.Uri.EscapeUriString(Password));
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(LOGIN_URL);
 
@@ -67,8 +78,12 @@ namespace Penguin.Authentication.OWA
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse(); // send request,get response
 
                 dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-                string responseFromServer = reader.ReadToEnd();
+                string responseFromServer = string.Empty;
+
+                using (StreamReader reader = new StreamReader(dataStream))
+                {
+                    responseFromServer = reader.ReadToEnd();
+                }
 
                 return response.ResponseUri.AbsoluteUri.Equals(SUCCESS_URI, StringComparison.CurrentCultureIgnoreCase);
             }
