@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageProjectUrl>https://github.com/penguincms/Penguin.Authentication.OWA</PackageProjectUrl>
-    <Version>5.0.1</Version>
+    <Version>5.0.5</Version>
     <Description>Provides a method for authenticating against Outlook Web Access, allowing domain authentication without access to the domain server</Description>
     <AssemblyName>Penguin.Authentication.OWA</AssemblyName>
     <RootNamespace>Penguin.Authentication.OWA</RootNamespace>
