@@ -35,7 +35,6 @@ namespace Penguin.Authentication.OWA
         /// <param name="Username"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         public bool Validate(string Username, string Password)
         {
             if (Username is null)
