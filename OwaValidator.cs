@@ -20,9 +20,9 @@ namespace Penguin.Authentication.OWA
         /// </summary>
         public OWAValidator()
         {
-            this.GetClientId();
-            this.Cookies.Add(new Cookie("PrivateComputer", "true", "/", "exchange.postoffice.net"));
-            this.Cookies.Add(new Cookie("PBack", "0", "/", "exchange.postoffice.net"));
+            GetClientId();
+            Cookies.Add(new Cookie("PrivateComputer", "true", "/", "exchange.postoffice.net"));
+            Cookies.Add(new Cookie("PBack", "0", "/", "exchange.postoffice.net"));
         }
 
         #endregion Constructors
@@ -54,7 +54,7 @@ namespace Penguin.Authentication.OWA
             request.Method = "POST";
             request.KeepAlive = true;
             request.ContentLength = data.Length;
-            HttpRequestCachePolicy requestPolicy = new HttpRequestCachePolicy(HttpCacheAgeControl.MaxAge, TimeSpan.FromDays(0));
+            HttpRequestCachePolicy requestPolicy = new(HttpCacheAgeControl.MaxAge, TimeSpan.FromDays(0));
             request.CachePolicy = requestPolicy;
             request.Headers.Add("origin", "https://exchange.postoffice.net");
             request.Headers.Add("Upgrade-Insecure-Requests", "1");
@@ -64,7 +64,7 @@ namespace Penguin.Authentication.OWA
             request.Referer = CLIENT_ID_URL;
             request.Headers.Add("Accept-Encoding", "gzip, deflate, br");
             request.Headers.Add("Accept-Language", "en-US,en;q=0.9");
-            request.CookieContainer = this.Cookies;
+            request.CookieContainer = Cookies;
 
             Stream dataStream = request.GetRequestStream();
 
@@ -79,12 +79,12 @@ namespace Penguin.Authentication.OWA
                 dataStream = response.GetResponseStream();
                 string responseFromServer = string.Empty;
 
-                using (StreamReader reader = new StreamReader(dataStream))
+                using (StreamReader reader = new(dataStream))
                 {
                     responseFromServer = reader.ReadToEnd();
                 }
 
-                return response.ResponseUri.AbsoluteUri.Equals(SUCCESS_URI, StringComparison.CurrentCultureIgnoreCase);
+                return response.ResponseUri.AbsoluteUri.Equals(SUCCESS_URI, StringComparison.OrdinalIgnoreCase);
             }
             catch (Exception ex)
             {
@@ -102,7 +102,7 @@ namespace Penguin.Authentication.OWA
         private const string LOGIN_URL = "https://exchange.postoffice.net/owa/auth.owa";
         private const string SUCCESS_URI = "https://exchange.postoffice.net/owa/";
         private const string VALIDATE_FORMAT = "destination=https%3A%2F%2Fexchange.postoffice.net%2Fowa&flags=4&forcedownlevel=0&username={0}&password={1}&passwordText=&trusted=4&isUtf8=1";
-        private readonly CookieContainer Cookies = new CookieContainer();
+        private readonly CookieContainer Cookies = new();
 
         #endregion Fields
 
@@ -115,7 +115,7 @@ namespace Penguin.Authentication.OWA
             string path = null;
             string expiresString = null;
 
-            Dictionary<string, string> cookiesValues = new Dictionary<string, string>();
+            Dictionary<string, string> cookiesValues = new();
 
             string[] cookieValuePairsStrings = cookieString.Split(';');
             foreach (string cookieValuePairString in cookieValuePairsStrings)
@@ -133,13 +133,11 @@ namespace Penguin.Authentication.OWA
                     {
                         httpOnly = true;
                     }
-                    else if (propertyName.Equals("secure", StringComparison.OrdinalIgnoreCase))
-                    {
-                        secure = true;
-                    }
                     else
                     {
-                        throw new InvalidOperationException(string.Format("Unknown cookie property \"{0}\". All cookie is \"{1}\"", propertyName, cookieString));
+                        secure = propertyName.Equals("secure", StringComparison.OrdinalIgnoreCase)
+                            ? true
+                            : throw new InvalidOperationException(string.Format("Unknown cookie property \"{0}\". All cookie is \"{1}\"", propertyName, cookieString));
                     }
 
                     continue;
@@ -164,24 +162,16 @@ namespace Penguin.Authentication.OWA
                 }
             }
 
-            DateTime expiresDateTime;
-            if (expiresString != null)
-            {
-                expiresDateTime = DateTime.Parse(expiresString);
-            }
-            else
-            {
-                expiresDateTime = DateTime.MinValue;
-            }
+            DateTime expiresDateTime = expiresString != null ? DateTime.Parse(expiresString) : DateTime.MinValue;
             if (string.IsNullOrEmpty(domainFromCookie))
             {
                 domainFromCookie = getCookieDomainIfItIsMissingInCookie();
             }
 
-            CookieCollection cookieCollection = new CookieCollection();
+            CookieCollection cookieCollection = new();
             foreach (KeyValuePair<string, string> pair in cookiesValues)
             {
-                Cookie cookie = new Cookie(pair.Key, pair.Value, path, domainFromCookie)
+                Cookie cookie = new(pair.Key, pair.Value, path, domainFromCookie)
                 {
                     Secure = secure,
                     HttpOnly = httpOnly,
@@ -222,7 +212,7 @@ namespace Penguin.Authentication.OWA
 
             foreach (Cookie c in response.Cookies)
             {
-                this.Cookies.Add(c);
+                Cookies.Add(c);
             }
         }
     }
