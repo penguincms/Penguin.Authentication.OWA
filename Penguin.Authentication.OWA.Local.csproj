@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
     <PackageProjectUrl>https://github.com/PenguinCms/Penguin.Authentication.OWA</PackageProjectUrl>
     <Version>5.0.5</Version>
     <Description>Provides a method for authenticating against Outlook Web Access, allowing domain authentication without access to the domain server</Description>
