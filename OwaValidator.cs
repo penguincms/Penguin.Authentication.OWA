@@ -126,6 +126,7 @@ namespace Penguin.Authentication.OWA
                 {
                     pairArr[i] = pairArr[i].Trim();
                 }
+
                 string propertyName = pairArr[0];
                 if (pairArrLength == 1)
                 {
@@ -180,6 +181,7 @@ namespace Penguin.Authentication.OWA
 
                 cookieCollection.Add(cookie);
             }
+
             return cookieCollection;
         }
 
